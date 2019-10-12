@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../public/styles.css" rel="stylesheet" type="text/css" >
+    <title>Introduction to WebRTC</title>
+</head>
+<body>
+   <video autoplay ></video>
+
+   <div>
+       Video: <select id="camera" ></select>
+   </div>
+
+   <script>
+//for different browser
+       navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia ||
+        
+       navigator.mediaDevices.webKitGetUserMedia || navigator.mediaDevices.mozGetUserMedia 
+       
+
+
+       const constraints = {audio: true, video: true} // turn on our audio and video
+
+       // reference to the video tag
+ 
+    //    const videoArea = document.querySelector'video'
+
+       //The call to getUserMedia
+    //    navigator.getUserMediaconstraints, onSuccess, onError
+    //onSuccess and onError are callbacks for resolve & reject
+
+    //    function onSuccessstream
+    //        console.log'Success! we have a stream!'
+    //        videoArea.src = window.URL.createObjectURLstream
+    //        videoArea.play
+    //    
+
+    //    function onErrorerror
+    //        console.log'Error with getUserMedia:' , error
+       
+    navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (mediaStream) {
+                const video = document.querySelector('video');
+                const videoSelect = document.querySelector('#camera')
+                video.srcObject = mediaStream;
+                video.className = "grayscale_filter"
+                video.onloadedmetadata = function (e) {
+                    video.play();
+                    console.log('MY VIDEO AND AUDIO ARE WORKING')
+                };
+            })
+            .catch(function (err) { console.log(err.name + ": " + err.message)})
+   </script>
+</body>
+</html>
